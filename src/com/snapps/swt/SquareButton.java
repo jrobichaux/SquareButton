@@ -89,6 +89,7 @@ public class SquareButton extends Canvas {
 	protected int innerMarginWidth = 8;
 	protected int innerMarginHeight = 4;
 	protected int borderWidth = 1;
+	protected int imagePadding = 5;
 	protected boolean enabled = true;
 	protected boolean roundedCorners = true;
 	protected boolean isFocused = false;
@@ -101,6 +102,10 @@ public class SquareButton extends Canvas {
 	public static int BG_IMAGE_CENTER = 3;
 	public static int BG_IMAGE_FIT = 4;
 	protected int backgroundImageStyle = 0;
+	
+	public static int IMAGE_LEFT = 0;
+	public static int IMAGE_RIGHT = 1;
+	protected int imageStyle = 0;
 	
 	
 	public SquareButton(Composite parent, int style) {
@@ -411,18 +416,32 @@ public class SquareButton extends Canvas {
 			gc.drawRectangle(rect.x + (bw+1), rect.y + (bw+1), rect.width - (bw+5), rect.height - (bw+5));
 		}
 		
-		// image beside the button text, if any
-		if (image != null) {
-			gc.drawImage(image, x, y);
-			x += image.getBounds().width + 5;
+		// side image and/or button text, if any
+		if (imageStyle == IMAGE_RIGHT) {
+			drawText(gc, x, y);
+			if (image != null) {
+				x = rect.width - x - image.getBounds().width + imagePadding;
+				drawImage(gc, x, y);
+			}
+		} else {
+			x = drawImage(gc, x, y);
+			drawText(gc, x, y);
 		}
-		
-		// and finally, the text on the button, if any
-		if (text != null) {
-			gc.setFont(font);
-			gc.setForeground(currentFontColor);
-			gc.drawText(text, x, y, SWT.DRAW_TRANSPARENT);
-		}
+	}
+	
+	
+	private void drawText (GC gc, int x, int y) {
+		gc.setFont(font);
+		gc.setForeground(currentFontColor);
+		gc.drawText(text, x, y, SWT.DRAW_TRANSPARENT);
+	}
+	
+	
+	private int drawImage (GC gc, int x, int y) {
+		if (image == null)
+			return x;
+		gc.drawImage(image, x, y);
+		return x + image.getBounds().width + imagePadding;
 	}
 	
 	
@@ -486,7 +505,7 @@ public class SquareButton extends Canvas {
 		int width = 0, height = 0;
 		if (image != null) {
 			Rectangle bounds = image.getBounds();
-			width = bounds.width + 5;
+			width = bounds.width + imagePadding;
 			height = bounds.height + (this.innerMarginHeight*2);
 		}
 		if (text != null) {
@@ -528,6 +547,21 @@ public class SquareButton extends Canvas {
 	public Image getImage() {
 		return image;
 	}
+	
+	/**
+	 * Set the style with which the side image is drawn, either IMAGE_LEFT
+	 * or IMAGE_RIGHT (default is IMAGE_LEFT).
+	 * 
+	 * @param imageStyle
+	 */
+	public void setImageStyle(int imageStyle) {
+		this.imageStyle = imageStyle;
+	}
+	public int getImageStyle() {
+		return imageStyle;
+	}
+	
+
 	
 	/**
 	 * This is an image that will be used as a background image for the 

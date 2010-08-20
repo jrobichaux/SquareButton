@@ -1,0 +1,32 @@
+The SquareButton class is a simple SWT widget that can be used in place of 
+a native SWT button. Unlike the native button, this should look exactly the 
+same on all platforms, which is very helpful when designing tightly spaced 
+multi-platform layouts (I'm looking at you, gigantic blue Mac OS X buttons).
+
+Here's a simple example:
+
+		SquareButton myButton = new SquareButton(composite, SWT.NONE);
+		myButton.setText("This is my button");
+		myButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent event) {
+				doSomethingAmazing();    // the click action 
+			}
+		});
+
+The default button style looks sort of similar to the buttons on the Gmail 
+web interface. You can very easily create your own styles that look different. 
+Colors can be specified for when the button is unselected, inactive, focused, 
+clicked, and hovered over. If two different background colors are specified 
+for a given button style, the button background will be a top-to-bottom 
+blended gradient of the two colors.
+
+You can also specify a background image to be used, either cropped, centered, 
+stretched, tiled, or set such that the button is exactly the size of the 
+background image.
+
+This code may be used under the terms of the Apache license, version 2.0. 
+Copyright 2009-2010 Strategic Network Applications, Inc. (http://www.snapps.com).
+
+
+@author Julian Robichaux
+@version 1.0

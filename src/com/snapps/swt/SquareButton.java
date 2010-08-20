@@ -478,7 +478,8 @@ public class SquareButton extends Canvas {
 	
 	
 	public Point computeSize(int wHint, int hHint, boolean changed) {
-		if ((wHint == SWT.DEFAULT) && (hHint == SWT.DEFAULT) && !changed) {
+		if ((wHint == SWT.DEFAULT) && (hHint == SWT.DEFAULT) && !changed && 
+				(lastWidth > 0) && (lastHeight > 0)) {
 			return new Point(lastWidth, lastHeight);
 		}
 		

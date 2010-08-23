@@ -369,7 +369,7 @@ public class SquareButton extends Canvas {
 		
 		
 		// draw the background color of the inside of the button. There's no such
-		// thing as a filled rounded rectangle in SWT, so we need to draw a filled
+		// thing as a rounded gradient rectangle in SWT, so we need to draw a filled
 		// rectangle that's just the right size to fit inside a rounded rectangle
 		// without spilling out at the corners
 		gc.setForeground(this.currentColor);
@@ -534,9 +534,11 @@ public class SquareButton extends Canvas {
 	
 	
 	/**
-	 * This is an image that will be displayed to the left of the 
-	 * text inside the button (if any). If there is no text, the 
-	 * image will be centered inside the button.
+	 * This is an image that will be displayed to the side of the 
+	 * text inside the button (if any). By default the image will be 
+	 * to the left of the text; however, setImageStyle can be used to 
+	 * specify that it's either to the right or left. If there is no 
+	 * text, the image will be centered inside the button.
 	 * 
 	 * @param image
 	 */
@@ -657,7 +659,7 @@ public class SquareButton extends Canvas {
 	/**
 	 * Set the inner margin between the left and right of the text 
 	 * inside the button and the button borders, in pixels. Like the 
-	 * horizontal padding for the text. Default is 8 pixels.
+	 * left and right padding for the text. Default is 8 pixels.
 	 * 
 	 * @param innerMarginWidth
 	 */
@@ -672,7 +674,7 @@ public class SquareButton extends Canvas {
 	/**
 	 * Set the inner margin between the top and bottom of the text 
 	 * inside the button and the button borders, in pixels. Like the 
-	 * vertical padding for the text. Default is 4 pixels.
+	 * top and bottom padding for the text. Default is 4 pixels.
 	 * 
 	 * @param innerMarginHeight
 	 */
@@ -699,7 +701,7 @@ public class SquareButton extends Canvas {
 	
 	/**
 	 * Set whether or not a dotted-line border should be drawn around 
-	 * the text inside the button when the button has focus. Default is 
+	 * the text inside the button when the button has tab focus. Default is 
 	 * false (no selection border). If a selection border is used, it will 
 	 * be the same color as the font color. Note that you can also use 
 	 * setSelectedColors() to change the look of the button when it has 
